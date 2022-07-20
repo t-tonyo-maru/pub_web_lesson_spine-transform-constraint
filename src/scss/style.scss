@@ -24,43 +24,14 @@
 @use './base/reset' as *;
 @use './base/base' as *;
 
-/* --------------------
-      layout
--------------------- */
-@use './layout/wrapper' as *;
-@use './layout/header' as *;
-@use './layout/main' as *;
-@use './layout/footer' as *;
+.wrapper {
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+}
 
-/* --------------------
-      module
--------------------- */
-
-// element
-@use './module/element/btn' as *;
-@use './module/element/banner' as *;
-
-// block
-@use './module/block/card' as *;
-@use './module/block/media' as *;
-@use './module/block/pager' as *;
-@use './module/block/horizBtnList' as *;
-@use './module/block/headerCont' as *;
-@use './module/block/footerCont' as *;
-@use './module/block/fixBanner' as *;
-
-/* --------------------
-      unique
--------------------- */
-
-/* --------------------
-      program
--------------------- */
-@use './program/fixBanner' as *;
-
-/* --------------------
-      helper
--------------------- */
-@use './helper/clearfix' as *;
-@use './helper/margin' as *;
-@use './helper/padding' as *;
+#canvas {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
