@@ -1,4 +1,4 @@
-export default () => {
+export const windowResize = () => {
   let timer: number = 0
   let currentWidth = window.innerWidth
 
