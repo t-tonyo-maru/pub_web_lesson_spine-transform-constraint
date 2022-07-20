@@ -1,0 +1,5 @@
+// pxをremに変換
+// font-size: rem(14); => fontsize: 1.4rem;
+@function rem($px, $base: 10) {
+  @return ($px / $base) + rem;
+}

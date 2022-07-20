@@ -1,0 +1,16 @@
+extends ../_base/_layout
+block append vars
+  - var path = '../';
+  - var title = 'detail';
+block title
+  title= 'detail site title' + ' | ' + title
+block append meta
+block append link
+  link(rel="stylesheet" href=`${path}assets/css/detail.css`)
+block body
+  #wrapper.ly_wrapper
+    include ../_parts/_header
+    main.ly_main
+    include ../_parts/_footer
+block append script
+  script(src=`${path}assets/js/detail.js`)
