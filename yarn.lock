@@ -325,6 +325,18 @@
   resolved "https://registry.yarnpkg.com/@discoveryjs/json-ext/-/json-ext-0.5.3.tgz#90420f9f9c6d3987f176a19a7d8e764271a2f55d"
   integrity sha512-Fxt+AfXgjMoin2maPIYzFZnQjAXjAL0PHscM5pRTtatFqB+vZxAM9tLp2Optnuw3QOQC40jTNeGYFOMvyf7v9g==
 
+"@esotericsoftware/spine-core@^4.1.19":
+  version "4.2.4"
+  resolved "https://registry.yarnpkg.com/@esotericsoftware/spine-core/-/spine-core-4.2.4.tgz#a38744c9973f6668b86e7dc80e558b25d6611be3"
+  integrity sha512-tOgG+HFVuy0Ey91fj1jWEqNaKRVkSc3sZEMw8xfREN8eKsq7IRDxmG4e+o5ENGlEvQaGYh+JQBu3KqzMfWLFTw==
+
+"@esotericsoftware/spine-webgl@4.1.19":
+  version "4.1.19"
+  resolved "https://registry.yarnpkg.com/@esotericsoftware/spine-webgl/-/spine-webgl-4.1.19.tgz#317af0b6b8f9655930e0ab8719f6aea143c458d0"
+  integrity sha512-p0sGVLFTJS1HAtbtBAR53gSRCyGa/1J5N1qlIVtLWWf4Hd/xGq658tiNoYKi2Ees1IV4jCP2RabltC/B4URSQw==
+  dependencies:
+    "@esotericsoftware/spine-core" "^4.1.19"
+
 "@istanbuljs/load-nyc-config@^1.0.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@istanbuljs/load-nyc-config/-/load-nyc-config-1.1.0.tgz#fd3db1d59ecf7cf121e80650bb86712f9b55eced"
