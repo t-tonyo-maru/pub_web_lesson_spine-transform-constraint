@@ -2,8 +2,7 @@ module.exports = {
   mode: 'development',
   target: ['browserslist'],
   entry: {
-    main: `./src/ts/main.ts`,
-    detail: `./src/ts/detail.ts`
+    main: `./src/ts/main.ts`
   },
   output: {
     filename: '[name].js',
