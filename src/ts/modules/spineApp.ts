@@ -7,6 +7,13 @@ export class SpineApp implements spine.SpineCanvasApp {
   private state: unknown // type: spine.AnimationState
   private verticalInputRange: HTMLInputElement
   private horizontalInputRange: HTMLInputElement
+  private flontBonePositon: {
+    x: number
+    y: number
+  } = {
+    x: 0,
+    y: 0
+  }
 
   constructor({
     verticalInputRange,
@@ -42,12 +49,18 @@ export class SpineApp implements spine.SpineCanvasApp {
     this.skeleton = new spine.Skeleton(skeltonData)
 
     if (this.skeleton instanceof spine.Skeleton) {
+      // skeleton の大きさを等倍にセット
+      this.skeleton.scaleX = 1.5
+      this.skeleton.scaleY = 1.5
       // skeleton の位置を画面中央にセット
       this.skeleton.x = 0
       this.skeleton.y = (-1 * Math.floor(this.skeleton.data.height)) / 2
-      // skeleton の大きさを等倍にセット
-      this.skeleton.scaleX = 1
-      this.skeleton.scaleY = 1
+      // flont ボーンの初期値をセット
+      const flontBone = this.skeleton.findBone('flont')
+      if (flontBone !== null) {
+        this.flontBonePositon.x = flontBone.x
+        this.flontBonePositon.y = flontBone.y
+      }
     }
 
     // skeleton 情報からアニメーション情報を取得
