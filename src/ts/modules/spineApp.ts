@@ -66,6 +66,13 @@ export class SpineApp implements spine.SpineCanvasApp {
     // デバック用に制御用ボーンを表示
     renderer.drawSkeletonDebug(this.skeleton)
 
+    // flont ボーンを取得
+    const flontBone = this.skeleton.findBone('flont')
+    if (flontBone !== null) {
+      flontBone.x += 1
+      console.log(flontBone)
+    }
+
     // トランスフォームコンストレイントのボーンを取得
     const controlBone = this.skeleton.findTransformConstraint('face')
     // console.log(controlBone)
