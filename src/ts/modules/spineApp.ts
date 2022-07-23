@@ -63,6 +63,9 @@ export class SpineApp implements spine.SpineCanvasApp {
 
     // レンダラーを取得
     const renderer = canvas.renderer
+    // デバック用に制御用ボーンを表示
+    renderer.drawSkeletonDebug(this.skeleton)
+
 
     // 画面リサイズ。（ブラウザサイズが変更された時の対応）
     renderer.resize(spine.ResizeMode.Expand)
