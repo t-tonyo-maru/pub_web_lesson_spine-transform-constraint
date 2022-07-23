@@ -66,6 +66,9 @@ export class SpineApp implements spine.SpineCanvasApp {
     // デバック用に制御用ボーンを表示
     renderer.drawSkeletonDebug(this.skeleton)
 
+    // トランスフォームコンストレイントのボーンを取得
+    const controlBone = this.skeleton.findTransformConstraint('face')
+    // console.log(controlBone)
 
     // 画面リサイズ。（ブラウザサイズが変更された時の対応）
     renderer.resize(spine.ResizeMode.Expand)
