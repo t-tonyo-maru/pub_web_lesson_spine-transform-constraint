@@ -7,13 +7,7 @@ export class SpineApp implements spine.SpineCanvasApp {
   private state: unknown // type: spine.AnimationState
   private verticalInputRange: HTMLInputElement
   private horizontalInputRange: HTMLInputElement
-  private flontBonePositon: {
-    x: number
-    y: number
-  } = {
-    x: 0,
-    y: 0
-  }
+  private flontBone: spine.Bone | null
 
   constructor({
     verticalInputRange,
@@ -24,6 +18,7 @@ export class SpineApp implements spine.SpineCanvasApp {
   }) {
     this.verticalInputRange = verticalInputRange
     this.horizontalInputRange = horizontalInputRange
+    this.flontBone = null
   }
 
   loadAssets = (canvas: spine.SpineCanvas) => {
@@ -58,8 +53,7 @@ export class SpineApp implements spine.SpineCanvasApp {
       // flont ボーンの初期値をセット
       const flontBone = this.skeleton.findBone('flont')
       if (flontBone !== null) {
-        this.flontBonePositon.x = flontBone.x
-        this.flontBonePositon.y = flontBone.y
+        this.flontBone = flontBone
       }
     }
 
@@ -90,11 +84,12 @@ export class SpineApp implements spine.SpineCanvasApp {
     // デバック用に制御用ボーンを表示
     renderer.drawSkeletonDebug(this.skeleton)
 
-    // flont ボーンを取得
-    const flontBone = this.skeleton.findBone('flont')
-    if (flontBone !== null) {
-      flontBone.x = parseInt(this.verticalInputRange.value)
-      flontBone.y = parseInt(this.horizontalInputRange.value)
+    // flont ボーンを更新
+    if (this.flontBone !== null) {
+      this.flontBone.x = parseInt(this.verticalInputRange.value)
+      this.flontBone.y = parseInt(this.horizontalInputRange.value)
+      console.log(this.flontBone.x)
+      console.log(this.flontBone.y)
     }
 
     // トランスフォームコンストレイントのボーンを取得
