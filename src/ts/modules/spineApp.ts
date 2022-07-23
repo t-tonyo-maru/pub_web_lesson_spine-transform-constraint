@@ -5,6 +5,19 @@ import * as spine from '@esotericsoftware/spine-webgl'
 export class SpineApp implements spine.SpineCanvasApp {
   private skeleton: unknown // type: spine.Skeleton
   private state: unknown // type: spine.AnimationState
+  private _verticalInputRange: HTMLInputElement
+  private _horizontalInputRange: HTMLInputElement
+
+  constructor({
+    verticalInputRange,
+    horizontalInputRange
+  }: {
+    verticalInputRange: HTMLInputElement
+    horizontalInputRange: HTMLInputElement
+  }) {
+    this._verticalInputRange = verticalInputRange
+    this._horizontalInputRange = horizontalInputRange
+  }
 
   loadAssets = (canvas: spine.SpineCanvas) => {
     // atlas ファイルをロード
@@ -24,9 +37,7 @@ export class SpineApp implements spine.SpineCanvasApp {
     // skeleton(json 形式) を読み込むためのオブジェクトを生成
     const skeltonJson = new spine.SkeletonJson(atlasLoader)
     // skeleton 情報を読み込み
-    const skeltonData = skeltonJson.readSkeletonData(
-      assetManager.require('model.json')
-    )
+    const skeltonData = skeltonJson.readSkeletonData(assetManager.require('model.json'))
     // skeleton インスタンスを生成して、メンバにセット
     this.skeleton = new spine.Skeleton(skeltonData)
 
@@ -69,8 +80,8 @@ export class SpineApp implements spine.SpineCanvasApp {
     // flont ボーンを取得
     const flontBone = this.skeleton.findBone('flont')
     if (flontBone !== null) {
-      flontBone.x += 1
-      console.log(flontBone)
+      // flontBone.x += 1
+      // console.log(flontBone)
     }
 
     // トランスフォームコンストレイントのボーンを取得
