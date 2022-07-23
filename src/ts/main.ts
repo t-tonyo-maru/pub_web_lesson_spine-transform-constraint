@@ -6,6 +6,10 @@ import { SpineApp } from './modules/spineApp'
 window.onload = () => {
   // canvas 要素
   const canvasEl = document.getElementById('canvas') as HTMLCanvasElement
+  // #vertical
+  const verticalRange = document.getElementById('vertical') as HTMLInputElement
+  // #horizontal
+  const horizontalRange = document.getElementById('horizontal') as HTMLInputElement
 
   // canvas 要素と SpineApp インスタンスを紐付ける
   new spine.SpineCanvas(canvasEl, {
