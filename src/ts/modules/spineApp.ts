@@ -5,8 +5,8 @@ import * as spine from '@esotericsoftware/spine-webgl'
 export class SpineApp implements spine.SpineCanvasApp {
   private skeleton: unknown // type: spine.Skeleton
   private state: unknown // type: spine.AnimationState
-  private _verticalInputRange: HTMLInputElement
-  private _horizontalInputRange: HTMLInputElement
+  private verticalInputRange: HTMLInputElement
+  private horizontalInputRange: HTMLInputElement
 
   constructor({
     verticalInputRange,
@@ -15,8 +15,8 @@ export class SpineApp implements spine.SpineCanvasApp {
     verticalInputRange: HTMLInputElement
     horizontalInputRange: HTMLInputElement
   }) {
-    this._verticalInputRange = verticalInputRange
-    this._horizontalInputRange = horizontalInputRange
+    this.verticalInputRange = verticalInputRange
+    this.horizontalInputRange = horizontalInputRange
   }
 
   loadAssets = (canvas: spine.SpineCanvas) => {
@@ -80,8 +80,8 @@ export class SpineApp implements spine.SpineCanvasApp {
     // flont ボーンを取得
     const flontBone = this.skeleton.findBone('flont')
     if (flontBone !== null) {
-      // flontBone.x += 1
-      // console.log(flontBone)
+      flontBone.x = parseInt(this.verticalInputRange.value)
+      flontBone.y = parseInt(this.horizontalInputRange.value)
     }
 
     // トランスフォームコンストレイントのボーンを取得
