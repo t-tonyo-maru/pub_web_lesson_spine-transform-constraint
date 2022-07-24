@@ -5,6 +5,25 @@ import * as spine from '@esotericsoftware/spine-webgl'
 export class SpineApp implements spine.SpineCanvasApp {
   private skeleton: unknown // type: spine.Skeleton
   private state: unknown // type: spine.AnimationState
+  private verticalInputRange: HTMLInputElement
+  private horizontalInputRange: HTMLInputElement
+  private flontBone: spine.Bone | null
+  private flontBoneRange = {
+    x: { min: -200, max: -30 },
+    y: { min: -150, max: -20 }
+  }
+
+  constructor({
+    verticalInputRange,
+    horizontalInputRange
+  }: {
+    verticalInputRange: HTMLInputElement
+    horizontalInputRange: HTMLInputElement
+  }) {
+    this.verticalInputRange = verticalInputRange
+    this.horizontalInputRange = horizontalInputRange
+    this.flontBone = null
+  }
 
   loadAssets = (canvas: spine.SpineCanvas) => {
     // atlas ファイルをロード
@@ -24,19 +43,22 @@ export class SpineApp implements spine.SpineCanvasApp {
     // skeleton(json 形式) を読み込むためのオブジェクトを生成
     const skeltonJson = new spine.SkeletonJson(atlasLoader)
     // skeleton 情報を読み込み
-    const skeltonData = skeltonJson.readSkeletonData(
-      assetManager.require('model.json')
-    )
+    const skeltonData = skeltonJson.readSkeletonData(assetManager.require('model.json'))
     // skeleton インスタンスを生成して、メンバにセット
     this.skeleton = new spine.Skeleton(skeltonData)
 
     if (this.skeleton instanceof spine.Skeleton) {
+      // skeleton の大きさを等倍にセット
+      this.skeleton.scaleX = 1.5
+      this.skeleton.scaleY = 1.5
       // skeleton の位置を画面中央にセット
       this.skeleton.x = 0
       this.skeleton.y = (-1 * Math.floor(this.skeleton.data.height)) / 2
-      // skeleton の大きさを等倍にセット
-      this.skeleton.scaleX = 1
-      this.skeleton.scaleY = 1
+      // flont ボーンの初期値をセット
+      const flontBone = this.skeleton.findBone('flont')
+      if (flontBone !== null) {
+        this.flontBone = flontBone
+      }
     }
 
     // skeleton 情報からアニメーション情報を取得
@@ -63,6 +85,14 @@ export class SpineApp implements spine.SpineCanvasApp {
 
     // レンダラーを取得
     const renderer = canvas.renderer
+    // デバック用に制御用ボーンを表示
+    renderer.drawSkeletonDebug(this.skeleton)
+
+    // flont ボーンを更新
+    if (this.flontBone !== null) {
+      this.flontBone.x = this.getflontBoneVPos()
+      this.flontBone.y = this.getflontBoneHPos()
+    }
 
     // 画面リサイズ。（ブラウザサイズが変更された時の対応）
     renderer.resize(spine.ResizeMode.Expand)
@@ -80,5 +110,21 @@ export class SpineApp implements spine.SpineCanvasApp {
     // エラーがあれば、以降が発火する
     console.log('error!!')
     console.log(canvas)
+  }
+
+  // flont ボーンの縦位置を取得
+  getflontBoneVPos = () => {
+    return (
+      this.flontBoneRange.x.min +
+      ((this.flontBoneRange.x.max - this.flontBoneRange.x.min) / 100) * parseInt(this.verticalInputRange.value)
+    )
+  }
+
+  // flont ボーンの横位置を取得
+  getflontBoneHPos = () => {
+    return (
+      this.flontBoneRange.y.min +
+      ((this.flontBoneRange.y.max - this.flontBoneRange.y.min) / 100) * parseInt(this.horizontalInputRange.value)
+    )
   }
 }
