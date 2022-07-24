@@ -8,6 +8,10 @@ export class SpineApp implements spine.SpineCanvasApp {
   private verticalInputRange: HTMLInputElement
   private horizontalInputRange: HTMLInputElement
   private flontBone: spine.Bone | null
+  private flontBoneRange = {
+    x: { min: -200, max: -30 },
+    y: { min: -150, max: -20 }
+  }
 
   constructor({
     verticalInputRange,
@@ -86,15 +90,9 @@ export class SpineApp implements spine.SpineCanvasApp {
 
     // flont ボーンを更新
     if (this.flontBone !== null) {
-      this.flontBone.x = parseInt(this.verticalInputRange.value)
-      this.flontBone.y = parseInt(this.horizontalInputRange.value)
-      console.log(this.flontBone.x)
-      console.log(this.flontBone.y)
+      this.flontBone.x = this.getflontBoneVPos()
+      this.flontBone.y = this.getflontBoneHPos()
     }
-
-    // トランスフォームコンストレイントのボーンを取得
-    const controlBone = this.skeleton.findTransformConstraint('face')
-    // console.log(controlBone)
 
     // 画面リサイズ。（ブラウザサイズが変更された時の対応）
     renderer.resize(spine.ResizeMode.Expand)
@@ -112,5 +110,21 @@ export class SpineApp implements spine.SpineCanvasApp {
     // エラーがあれば、以降が発火する
     console.log('error!!')
     console.log(canvas)
+  }
+
+  // flont ボーンの縦位置を取得
+  getflontBoneVPos = () => {
+    return (
+      this.flontBoneRange.x.min +
+      ((this.flontBoneRange.x.max - this.flontBoneRange.x.min) / 100) * parseInt(this.verticalInputRange.value)
+    )
+  }
+
+  // flont ボーンの横位置を取得
+  getflontBoneHPos = () => {
+    return (
+      this.flontBoneRange.y.min +
+      ((this.flontBoneRange.y.max - this.flontBoneRange.y.min) / 100) * parseInt(this.horizontalInputRange.value)
+    )
   }
 }
