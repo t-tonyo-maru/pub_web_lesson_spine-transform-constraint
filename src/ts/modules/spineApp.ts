@@ -82,7 +82,6 @@ export class SpineApp implements spine.SpineCanvasApp {
 
   render = (canvas: spine.SpineCanvas) => {
     if (!(this.skeleton instanceof spine.Skeleton)) return
-
     // レンダラーを取得
     const renderer = canvas.renderer
     // デバック用に制御用ボーンを表示
