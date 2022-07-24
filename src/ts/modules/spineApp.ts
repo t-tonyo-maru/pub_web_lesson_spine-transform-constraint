@@ -74,6 +74,12 @@ export class SpineApp implements spine.SpineCanvasApp {
     if (!(this.skeleton instanceof spine.Skeleton)) return
     if (!(this.state instanceof spine.AnimationState)) return
 
+    // flont ボーンを更新
+    if (this.flontBone !== null) {
+      this.flontBone.x = this.getflontBoneVPos()
+      this.flontBone.y = this.getflontBoneHPos()
+    }
+
     // アニメーションを更新
     this.state.update(delta)
     this.state.apply(this.skeleton)
@@ -86,13 +92,6 @@ export class SpineApp implements spine.SpineCanvasApp {
     const renderer = canvas.renderer
     // デバック用に制御用ボーンを表示
     renderer.drawSkeletonDebug(this.skeleton)
-
-    // flont ボーンを更新
-    if (this.flontBone !== null) {
-      this.flontBone.x = this.getflontBoneVPos()
-      this.flontBone.y = this.getflontBoneHPos()
-    }
-
     // 画面リサイズ。（ブラウザサイズが変更された時の対応）
     renderer.resize(spine.ResizeMode.Expand)
     // 画面クリア
