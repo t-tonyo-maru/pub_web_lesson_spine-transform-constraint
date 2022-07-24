@@ -76,8 +76,8 @@ export class SpineApp implements spine.SpineCanvasApp {
 
     // flont ボーンを更新
     if (this.flontBone !== null) {
-      this.flontBone.x = this.getflontBoneVPos()
-      this.flontBone.y = this.getflontBoneHPos()
+      this.flontBone.x = this.getflontBoneHPos()
+      this.flontBone.y = this.getflontBoneVPos()
     }
 
     // アニメーションを更新
@@ -110,19 +110,19 @@ export class SpineApp implements spine.SpineCanvasApp {
     console.log(canvas)
   }
 
-  // flont ボーンの縦位置を取得
-  getflontBoneVPos = () => {
-    return (
-      this.flontBoneRange.x.min +
-      ((this.flontBoneRange.x.max - this.flontBoneRange.x.min) / 100) * parseInt(this.verticalInputRange.value)
-    )
-  }
-
   // flont ボーンの横位置を取得
   getflontBoneHPos = () => {
     return (
+      this.flontBoneRange.x.min +
+      ((this.flontBoneRange.x.max - this.flontBoneRange.x.min) / 100) * parseInt(this.horizontalInputRange.value)
+    )
+  }
+
+  // flont ボーンの縦位置を取得
+  getflontBoneVPos = () => {
+    return (
       this.flontBoneRange.y.min +
-      ((this.flontBoneRange.y.max - this.flontBoneRange.y.min) / 100) * parseInt(this.horizontalInputRange.value)
+      ((this.flontBoneRange.y.max - this.flontBoneRange.y.min) / 100) * parseInt(this.verticalInputRange.value)
     )
   }
 }
