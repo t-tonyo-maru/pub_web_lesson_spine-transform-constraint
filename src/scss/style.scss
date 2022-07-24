@@ -35,3 +35,20 @@
   height: 100%;
   width: 100%;
 }
+
+.form {
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 10px 20px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 200px;
+  z-index: 9999;
+}
+
+.input-wrapper {
+  margin-top: 18px;
+  &:first-of-type {
+    margin-top: 0;
+  }
+}
